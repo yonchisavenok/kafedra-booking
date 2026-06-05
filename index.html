@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="uk" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>Бронювання аудиторій — Кафедра ГД</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Rounded:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script>
+  (function() {
+    const currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'light' || (!currentTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+      document.documentElement.classList.add('light-theme');
+    }
+  })();
+</script>
+<link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+<button id="theme-toggle" class="theme-switch-btn" aria-label="Змінити тему">
+  <svg class="theme-icon-sun" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+    <circle cx="12" cy="12" r="5"></circle>
+    <line x1="12" y1="1" x2="12" y2="3"></line>
+    <line x1="12" y1="21" x2="12" y2="23"></line>
+    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+    <line x1="1" y1="12" x2="3" y2="12"></line>
+    <line x1="21" y1="12" x2="23" y2="12"></line>
+    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+  </svg>
+  <svg class="theme-icon-moon" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="24" height="24">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+<div class="header-row">
+<h1 class=""><span class="highlight">ONLINE</span> бронювання<br/>аудиторій на перегляд</h1>
+<p class="subtitle">Кафедра графічного дизайну</p>
+</div>
+<div class="legend">
+<span class=""><span class="dot free"></span>вільна</span>
+<span class=""><span class="dot partial"></span>частково вільна</span>
+<span class=""><span class="dot busy"></span>зайнята вся</span>
+</div>
+<div class="map-container">
+<svg class="floor-map" viewbox="0 0 1200 440" xmlns="http://www.w3.org/2000/svg">
+<g class="map-group interactive" id="group-607">
+  <rect class="map-room" height="160" id="map-607" rx="12" width="170" x="80" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="165" y="100">607</text>
+</g>
+<g class="map-group interactive" id="group-606">
+  <rect class="map-room" height="160" id="map-606" rx="12" width="235" x="265" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="382.5" y="100">606</text>
+</g>
+<g class="map-group interactive" id="group-605">
+  <rect class="map-room" height="160" id="map-605" rx="12" width="115" x="515" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="572.5" y="100">605</text>
+</g>
+<g class="map-group interactive" id="group-604">
+  <rect class="map-room" height="160" id="map-604" rx="12" width="115" x="645" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="702.5" y="100">604</text>
+</g>
+<g class="map-group interactive" id="group-603">
+  <rect class="map-room" height="160" id="map-603" rx="12" width="115" x="775" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="832.5" y="100">603</text>
+</g>
+<g class="map-group interactive" id="group-602">
+  <rect class="map-room" height="160" id="map-602" rx="12" width="115" x="905" y="20"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="962.5" y="100">602</text>
+</g>
+<g class="map-group static" id="group-dept">
+  <rect class="map-tech" height="160" id="map-dept" rx="12" width="115" x="1035" y="20"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="1092.5" y="100">кафедра</text>
+</g>
+
+<g class="map-group interactive" id="group-cor-c">
+  <rect class="map-room" height="50" id="map-cor-c" rx="12" width="285" x="80" y="195"></rect>
+  <text class="map-text corridor-label" dominant-baseline="central" text-anchor="middle" x="222.5" y="220">лаундж 1</text>
+</g>
+<g class="map-group interactive" id="group-cor-b">
+  <rect class="map-room" height="50" id="map-cor-b" rx="12" width="510" x="380" y="195"></rect>
+  <text class="map-text corridor-label" dominant-baseline="central" text-anchor="middle" x="635" y="220">центр</text>
+</g>
+<g class="map-group interactive" id="group-cor-a">
+  <rect class="map-room" height="50" id="map-cor-a" rx="12" width="245" x="905" y="195"></rect>
+  <text class="map-text corridor-label" dominant-baseline="central" text-anchor="middle" x="1027.5" y="220">лаундж 2</text>
+</g>
+
+<g class="map-group static" id="group-lift">
+  <rect class="map-tech" height="160" id="map-lift" rx="12" width="45" x="20" y="20"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="42.5" y="100">ліфт</text>
+</g>
+<g class="map-group static" id="group-stairs-1">
+  <rect class="map-tech" height="80" id="map-stairs-1" rx="12" width="45" x="20" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="42.5" y="300">сходи</text>
+</g>
+<g class="map-group interactive" id="group-608">
+  <rect class="map-room" height="80" id="map-608" rx="12" width="155" x="80" y="260"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="157.5" y="300">608</text>
+</g>
+<g class="map-group interactive" id="group-609">
+  <rect class="map-room" height="160" id="map-609" rx="12" width="115" x="250" y="260"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="307.5" y="340">609</text>
+</g>
+<g class="map-group interactive" id="group-610">
+  <rect class="map-room" height="160" id="map-610" rx="12" width="115" x="380" y="260"></rect>
+  <text class="map-text room-num" dominant-baseline="central" text-anchor="middle" x="437.5" y="340">610</text>
+</g>
+<g class="map-group static" id="group-sklad">
+  <rect class="map-tech" height="160" id="map-sklad" rx="12" width="110" x="510" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="565" y="340">склад</text>
+</g>
+<g class="map-group static" id="group-kotel">
+  <rect class="map-tech" height="160" id="map-kotel" rx="12" width="110" x="635" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="690" y="340">котельня</text>
+</g>
+<g class="map-group static" id="group-toilet">
+  <rect class="map-tech" height="160" id="map-toilet" rx="12" width="110" x="760" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="815" y="340">туалет</text>
+</g>
+<g class="map-group static" id="group-stairs-2">
+  <rect class="map-tech" height="160" id="map-stairs-2" rx="12" width="65" x="885" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="917.5" y="340">сходи</text>
+</g>
+<g class="map-group static" id="group-terasa">
+  <rect class="map-tech" height="160" id="map-terasa" rx="12" width="185" x="965" y="260"></rect>
+  <text class="map-text tech-text" dominant-baseline="central" text-anchor="middle" x="1057.5" y="340">тераса</text>
+</g>
+</svg>
+</div>
+<div class="section-label">АУДИТОРІЇ</div>
+<div class="rooms-grid" id="rooms-grid"></div>
+<div class="section-label">КОРИДОР</div>
+<div class="cor-grid" id="cor-grid"></div>
+<div class="overlay" id="overlay" onclick="handleOverlay(event)">
+<div class="modal" id="modal"></div>
+</div>
+<script type="module" src="app.js"></script>
+</body></html>
