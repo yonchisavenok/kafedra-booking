@@ -13,23 +13,9 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const ROOMS = [
-  {id:'602',name:'602',type:'Майстерня ОВМ'},
-  {id:'603',name:'603',type:'Майстерня ОВМ'},
-  {id:'604',name:'604',type:'Майстерня ОВМ'},
-  {id:'605',name:'605',type:'Майстерня ОВМ'},
-  {id:'606',name:'606',type:'Лекційна'},
-  {id:'607',name:'607',type:'Галерея «Це»'},
-  {id:'608',name:'608',type:'Бібліотека'},
-  {id:'609',name:'609',type:'Комп\'ютерний клас'},
-  {id:'610',name:'610',type:'Мультимедійна майстерня'},
-];
-const CORRIDORS = [
-  {id:'cor-c',name:'лаундж 1', type:'коридор', isCorridor:true},
-  {id:'cor-b',name:'центр', type:'коридор', isCorridor:true},
-  {id:'cor-a',name:'лаундж 2', type:'коридор', isCorridor:true},
-];
-const ALL_ROOMS = [...ROOMS, ...CORRIDORS];
+let ROOMS = [];
+let CORRIDORS = [];
+let ALL_ROOMS = [];
 const STAGE_MAX_SLOTS = 4;
 
 const STAGE_DATETIME = {
@@ -42,12 +28,33 @@ let selectedRoomId = null;
 let editId = null;
 let selectedStagesForm = ['stage1'];
 
-onSnapshot(collection(db, 'bookings'), snap => {
-  bookings = snap.docs.map(d => ({id: d.id, ...d.data()}));
-  render();
-  updateMapColors();
-  if(selectedRoomId) renderModal();
-});
+async function initApp() {
+  try {
+    const response = await fetch('settings.json');
+    const data = await response.json();
+    ROOMS = data.rooms;
+    CORRIDORS = data.corridors;
+    ALL_ROOMS = [...ROOMS, ...CORRIDORS];
+
+    // Setup interactive map click event listeners
+    ALL_ROOMS.forEach(r => {
+      const group = document.getElementById(`group-${r.id}`);
+      if (group && group.classList.contains('interactive')) {
+        group.addEventListener('click', () => openModal(r.id));
+      }
+    });
+
+    // Start listening to booking updates
+    onSnapshot(collection(db, 'bookings'), snap => {
+      bookings = snap.docs.map(d => ({id: d.id, ...d.data()}));
+      render();
+      updateMapColors();
+      if(selectedRoomId) renderModal();
+    });
+  } catch (error) {
+    console.error("Error loading room configuration:", error);
+  }
+}
 
 function activeSlots(id){
   const now = new Date();
@@ -326,15 +333,7 @@ function renderModal(){
   `;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  ALL_ROOMS.forEach(r => {
-    const group = document.getElementById(`group-${r.id}`);
-    if (group && group.classList.contains('interactive')) {
-      group.addEventListener('click', () => openModal(r.id));
-    }
-  });
-  updateMapColors();
-
+function initAppOnDOMReady() {
   const themeToggleBtn = document.getElementById('theme-toggle');
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
@@ -343,4 +342,11 @@ document.addEventListener("DOMContentLoaded", () => {
       localStorage.setItem('theme', theme);
     });
   }
-});
+  initApp();
+}
+
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", initAppOnDOMReady);
+} else {
+  initAppOnDOMReady();
+}
